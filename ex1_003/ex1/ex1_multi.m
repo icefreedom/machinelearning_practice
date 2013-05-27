@@ -48,8 +48,9 @@ pause;
 
 % Scale features and set them to zero mean
 fprintf('Normalizing Features ...\n');
-
+myplot(X);
 [X mu sigma] = featureNormalize(X);
+myplot(X);
 
 % Add intercept term to X
 X = [ones(m, 1) X];

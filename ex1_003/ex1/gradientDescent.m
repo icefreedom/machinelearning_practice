@@ -18,13 +18,6 @@ for i = 1:size(X)(1,2),
     end;
 end;
 
-
-if max(y) > min(y),
-    ys = (y - sum(y) / length(y)) / (max(y) - min(y));
-else
-    ys = y;
-end;
-
 J_index = zeros(num_iters, 1);
 
 origin_theta = theta;
@@ -45,7 +38,9 @@ for iter = 1:num_iters
     % Hint: While debugging, it can be useful to print out the values
     %       of the cost function (computeCost) and gradient here.
     %
-    next_theta = theta - alpha / m  * (((theta' * Xs')' - ys)' * Xs)';
+
+    %if I choose Xs , it seems I got a wrong theta, why?
+    next_theta = theta - alpha / m  * (((theta' * X')' - y)' * X)';
     theta = next_theta;    
     
 
@@ -68,6 +63,10 @@ for iter = 1:num_iters
 
 
 end; % end for
+
+    %myplot(J_history);
+
+    disp(sprintf('alpha: %f, theta1: %f', alpha, theta(1)));
     if overhead,
         theta = prev_theta;
         J_history = prev_J_history;
@@ -81,12 +80,5 @@ end; % end for
     
 end;% end while
 
-%for iter=1:num_iters,
-%    J_index(iter) = iter;
-%end;
-%figure;
-%plot(J_index, J_history, 'rx', 'MarkerSize', 10);
-%xlabel('iterations');
-%ylabel('cost');
 
 end;
