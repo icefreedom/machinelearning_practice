@@ -35,6 +35,6 @@ for iter = 1:num_iters
     J_history(iter) = computeCostMulti(X, y, theta);
 
 end
-    myplot(J_history);
+    %myplot(J_history);
 
 end
