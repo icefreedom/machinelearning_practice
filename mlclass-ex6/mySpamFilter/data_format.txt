@@ -1,0 +1,10 @@
+Q: How to convert other data formats to LIBSVM format? 
+It depends on your data format. A simple way is to use libsvmwrite in the libsvm matlab/octave interface. Take a CSV (comma-separated values) file in UCI machine learning repository as an example. We download SPECTF.train. Labels are in the first column. The following steps produce a file in the libsvm format.
+
+matlab> SPECTF = csvread('SPECTF.train'); % read a csv file
+matlab> labels = SPECTF(:, 1); % labels from the 1st column
+matlab> features = SPECTF(:, 2:end); 
+matlab> features_sparse = sparse(features); % features must be in a sparse matrix
+matlab> libsvmwrite('SPECTFlibsvm.train', labels, features_sparse);
+The tranformed data are stored in SPECTFlibsvm.train.
+Alternatively, you can use convert.c to convert CSV format to libsvm format.
